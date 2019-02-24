@@ -8,50 +8,24 @@ class SudokuSolver extends Component {
 
         this.state =
             {
-                row1 : [],
-                row2 : [],
-                row3 : [],
-                row4 : [],
-                row5 : [],
-                row6 : [],
-                row7 : [],
-                row8 : [],
-                row9 : [],
                 grid : [],
             };
-        //first approach
-        for (var i=0;i<9;i++) {
-            this.state.row1[i] = [];
-            this.state.row2[i] = [];
-            this.state.row3[i] = [];
-            this.state.row4[i] = [];
-            this.state.row5[i] = [];
-            this.state.row6[i] = [];
-            this.state.row7[i] = [];
-            this.state.row8[i] = [];
-            this.state.row9[i] = [];
 
-        }
-        this.state.row1 = [".", ".", "2", "4", "6", "1", ".", "8", "9"];
-        this.state.row2 = [".", ".", ".", ".", ".", ".", ".", ".", "."];
-        this.state.row3 = [".", ".", ".", ".", ".", ".", ".", ".", "."];
-        this.state.row4 = [".", ".", ".", ".", ".", ".", ".", ".", "."];
-        this.state.row5 = [".", ".", ".", ".", ".", ".", ".", ".", "."];
-        this.state.row6 = [".", ".", ".", ".", ".", ".", ".", ".", "."];
-        this.state.row7 = [".", ".", ".", ".", ".", ".", ".", ".", "."];
-        this.state.row8 = [".", ".", ".", ".", ".", ".", ".", ".", "."];
-        this.state.row9 = [".", ".", ".", ".", ".", ".", ".", ".", "."];
-
-        //second approach
         for (var row=0;row<9;row++) {
             this.state.grid[row] = [];
-            for (var col=0;col<9;col++) {
-                this.state.grid[row][col] = [];
-            }
+            // for (var col=0;col<9;col++) {
+            //     this.state.grid[row][col] = [];
+            // }
         }
+        this.state.grid[0] = [".", ".", "2", "4", "6", "1", ".", "8", "9"];
+        this.state.grid[1] = [".", ".", ".", ".", ".", ".", ".", ".", "."];
+        this.state.grid[2] = [".", ".", ".", ".", ".", ".", ".", ".", "."];
+        this.state.grid[3] = [".", ".", ".", ".", ".", ".", ".", ".", "."];
         this.state.grid[4] = [".", ".", ".", ".", ".", ".", ".", ".", "."];
         this.state.grid[5] = [".", ".", ".", ".", ".", ".", ".", ".", "."];
-
+        this.state.grid[6] = [".", ".", ".", ".", ".", ".", ".", ".", "."];
+        this.state.grid[7] = [".", ".", ".", ".", ".", ".", ".", ".", "."];
+        this.state.grid[8] = [".", ".", ".", ".", ".", ".", ".", ".", "."];
     };
 
     //handler approach 2:
@@ -126,25 +100,33 @@ class SudokuSolver extends Component {
             <div>
                 <div>
                     {
-                        this.state.row1.map( (cell, index) => (
-                            <CellComponent key={index} value={this.state.row1[index]}
-                                           onChange={this.handleChangeRow1.bind(this, index)}/>
+                        this.state.grid[0].map( (cell, colIndex) => (
+                                <CellComponent key={colIndex} value={this.state.grid[0][colIndex]}
+                                               onChange={this.handleGridChange.bind(this, 0, colIndex)}/>
                             )
                         )}
                 </div>
                 <div>
-                {
-                    this.state.row2.map( (cell, index) => (
-                            <CellComponent key={index} value={this.state.row2[index]}
-                                           onChange={this.handleChangeRow2.bind(this, index)}/>
-                        )
-                    )}
+                    {
+                        this.state.grid[1].map( (cell, colIndex) => (
+                                <CellComponent key={colIndex} value={this.state.grid[1][colIndex]}
+                                               onChange={this.handleGridChange.bind(this, 1, colIndex)}/>
+                            )
+                        )}
                 </div>
                 <div>
                     {
-                        this.state.row3.map( (cell, index) => (
-                                <CellComponent key={index} value={this.state.row3[index]}
-                                               onChange={this.handleChangeRow3.bind(this, index)}/>
+                        this.state.grid[2].map( (cell, colIndex) => (
+                                <CellComponent key={colIndex} value={this.state.grid[2][colIndex]}
+                                               onChange={this.handleGridChange.bind(this, 2, colIndex)}/>
+                            )
+                        )}
+                </div>
+                <div>
+                    {
+                        this.state.grid[3].map( (cell, colIndex) => (
+                                <CellComponent key={colIndex} value={this.state.grid[3][colIndex]}
+                                               onChange={this.handleGridChange.bind(this, 3, colIndex)}/>
                             )
                         )}
                 </div>
@@ -164,7 +146,30 @@ class SudokuSolver extends Component {
                             )
                         )}
                 </div>
-
+                <div>
+                    {
+                        this.state.grid[6].map( (cell, colIndex) => (
+                                <CellComponent key={colIndex} value={this.state.grid[6][colIndex]}
+                                               onChange={this.handleGridChange.bind(this, 6, colIndex)}/>
+                            )
+                        )}
+                </div>
+                <div>
+                    {
+                        this.state.grid[7].map( (cell, colIndex) => (
+                                <CellComponent key={colIndex} value={this.state.grid[7][colIndex]}
+                                               onChange={this.handleGridChange.bind(this, 7, colIndex)}/>
+                            )
+                        )}
+                </div>
+                <div>
+                    {
+                        this.state.grid[8].map( (cell, colIndex) => (
+                                <CellComponent key={colIndex} value={this.state.grid[8][colIndex]}
+                                               onChange={this.handleGridChange.bind(this, 8, colIndex)}/>
+                            )
+                        )}
+                </div>
             </div>
         );
     }
