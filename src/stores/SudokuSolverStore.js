@@ -1,4 +1,4 @@
-var AppDispatcher = require('../dispatcher/AppDispatcher');
+import AppDispatcher from "../dispatcher/Dispatcher";
 var EventEmitter = require('events').EventEmitter;
 
 var puzzleData = {
@@ -20,6 +20,10 @@ class SudokuSolverStore extends EventEmitter {
         this.removeListener('change', callback);
     }
 
+    setData(newData){
+        puzzleData = newData;
+    }
+
     getData(){
         return puzzleData;
     }
@@ -28,9 +32,13 @@ class SudokuSolverStore extends EventEmitter {
 
         switch (action.actionName) {
 
-            // Do we know how to handle this action?
+            case 'NEW_DATA' :
+                this.setData(action.data);
+                this.emit('change');
+                break;
+
             case 'UPDATE':
-                console.log("SudokuSolverStore is handling UPDATE action!");
+                console.log("SudokuSolverStore is handling UPDATE action!: " + JSON.stringify(action.data));
                 this.emit('change');
                 break;
         }

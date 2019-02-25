@@ -3,6 +3,39 @@ import AppDispatcher from "../dispatcher/Dispatcher";
 
 const SudokuSolverAction = {
 
+    initSamplePuzzle(){
+        console.log("SudokuSolverAction initSamplePuzzle()");
+        var puzzle = {
+            rows:
+                [
+                    ["", "", "", "8", "1", "", "6", "7", ""],
+                    ["", "", "7", "4", "9", "", "2", "", "8"],
+                    ["", "6", "", "", "5", "", "1", "", "4"],
+                    ["1", "", "", "", "", "3", "9", "", ""],
+                    ["4", "", "", "", "8", "", "", "", "7"],
+                    ["", "", "6", "9", "", "", "", "", "3"],
+                    ["9", "", "2", "", "3", "", "", "6", ""],
+                    ["6", "", "1", "", "7", "4", "3", "", ""],
+                    ["", "3", "4", "", "6", "9", "", "", ""]
+                ]
+        }
+
+        AppDispatcher.dispatch({
+            actionName: 'NEW_DATA',
+            data: puzzle.rows
+        });
+    },
+
+    parseResponse(response){
+        var parsedData = {};
+        var temp = response.rows;
+        for (var row=0;row<9;row++) {
+            parsedData[row] = [];
+            parsedData[row] = temp[row].split('');
+        }
+        return parsedData;
+    },
+
     callSolverLambda() {
         console.log("SudokuSolverAction callSolverLambda()");
 
@@ -36,10 +69,11 @@ const SudokuSolverAction = {
                 } else {
                     console.log("success: ");
                     console.log(JSON.stringify(res));
+                    var parsedData = SudokuSolverAction.parseResponse(res.body);
                     //dispatch response
                     AppDispatcher.dispatch({
                         actionName: 'UPDATE',
-                        newItem: res.body
+                        data: parsedData
                     })
                 }
             });
