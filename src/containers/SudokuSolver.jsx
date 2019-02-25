@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import CellComponent from "../components/CellComponent";
+import SudokuSolverAction from "../actions/SudokuSolverAction";
 
 class SudokuSolver extends Component {
 
@@ -14,15 +15,16 @@ class SudokuSolver extends Component {
         for (var row=0;row<9;row++) {
             this.state.grid[row] = [];
         }
-        this.state.grid[0] = ["", "", "2", "4", "6", "1", "", "8", "9"];
-        this.state.grid[1] = ["", "", "", "", "", "", "", "", ""];
-        this.state.grid[2] = ["", "", "", "", "", "", "", "", ""];
-        this.state.grid[3] = ["", "", "", "", "", "", "", "", ""];
-        this.state.grid[4] = ["", "", "", "", "", "", "", "", ""];
-        this.state.grid[5] = ["", "", "", "", "", "", "", "", ""];
-        this.state.grid[6] = ["", "", "", "", "", "", "", "", ""];
-        this.state.grid[7] = ["", "", "", "", "", "", "", "", ""];
-        this.state.grid[8] = ["", "", "", "", "", "", "", "", ""];
+
+        this.state.grid[0] = ["", "", "", "8", "1", "", "6", "7", ""];
+        this.state.grid[1] = ["", "", "7", "4", "9", "", "2", "", "8"];
+        this.state.grid[2] = ["", "6", "", "", "5", "", "1", "", "4"];
+        this.state.grid[3] = ["1", "", "", "", "", "3", "9", "", ""];
+        this.state.grid[4] = ["4", "", "", "", "8", "", "", "", "7"];
+        this.state.grid[5] = ["", "", "6", "9", "", "", "", "", "3"];
+        this.state.grid[6] = ["9", "", "2", "", "3", "", "", "6", ""];
+        this.state.grid[7] = ["6", "", "1", "", "7", "4", "3", "", ""];
+        this.state.grid[8] = ["", "3", "4", "", "6", "9", "", "", ""];
     };
 
     //handler approach 2:
@@ -31,6 +33,12 @@ class SudokuSolver extends Component {
         var updatedGrid = [...this.state.grid];
         updatedGrid[row][colIndex] = event.target.value;
         this.setState( { grid : updatedGrid } );
+    }
+
+    handleSubmit(event){
+        event.preventDefault();
+        console.log("submit pressed");
+        SudokuSolverAction.callSolverLambda();
     }
 
     render() {
@@ -107,6 +115,9 @@ class SudokuSolver extends Component {
                                                onChange={this.handleGridChange.bind(this, 8, colIndex)}/>
                             )
                         )}
+                </div>
+                <div>
+                    <button onClick={this.handleSubmit}>Solve Puzzle</button>
                 </div>
             </div>
         );
