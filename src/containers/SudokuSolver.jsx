@@ -63,81 +63,104 @@ class SudokuSolver extends Component {
     render() {
         return (
             <div>
-                <div>
+            <table className="sudoku-grid">
+                <tbody>
+                <tr>
                     {
                         this.state.grid[0].map( (cell, colIndex) => (
+                            <td>
                                 <CellComponent key={colIndex} value={this.state.grid[0][colIndex]}
                                                onChange={this.handleGridChange.bind(this, 0, colIndex)}/>
+                            </td>
                             )
                         )}
-                </div>
-                <div>
+                </tr>
+                <tr>
                     {
+
                         this.state.grid[1].map( (cell, colIndex) => (
+                            <td>
                                 <CellComponent key={colIndex} value={this.state.grid[1][colIndex]}
                                                onChange={this.handleGridChange.bind(this, 1, colIndex)}/>
-                            )
+                            </td>
+                        )
                         )}
-                </div>
-                <div>
+                </tr>
+                <tr>
                     {
                         this.state.grid[2].map( (cell, colIndex) => (
+                            <td>
                                 <CellComponent key={colIndex} value={this.state.grid[2][colIndex]}
                                                onChange={this.handleGridChange.bind(this, 2, colIndex)}/>
+                            </td>
                             )
                         )}
-                </div>
-                <div>
+                </tr>
+                <tr>
                     {
                         this.state.grid[3].map( (cell, colIndex) => (
+                            <td>
                                 <CellComponent key={colIndex} value={this.state.grid[3][colIndex]}
                                                onChange={this.handleGridChange.bind(this, 3, colIndex)}/>
+                            </td>
                             )
                         )}
-                </div>
-                <div>
+                </tr>
+                <tr>
                     {
                         this.state.grid[4].map( (cell, colIndex) => (
+                            <td>
                                 <CellComponent key={colIndex} value={this.state.grid[4][colIndex]}
                                                onChange={this.handleGridChange.bind(this, 4, colIndex)}/>
+                            </td>
                             )
                         )}
-                </div>
-                <div>
+                </tr>
+                <tr>
                     {
                         this.state.grid[5].map( (cell, colIndex) => (
+                            <td>
                                 <CellComponent key={colIndex} value={this.state.grid[5][colIndex]}
                                                onChange={this.handleGridChange.bind(this, 5, colIndex)}/>
+                            </td>
                             )
                         )}
-                </div>
-                <div>
+                </tr>
+                <tr>
                     {
                         this.state.grid[6].map( (cell, colIndex) => (
+                            <td>
                                 <CellComponent key={colIndex} value={this.state.grid[6][colIndex]}
                                                onChange={this.handleGridChange.bind(this, 6, colIndex)}/>
+                            </td>
                             )
                         )}
-                </div>
-                <div>
+                </tr>
+                <tr>
                     {
                         this.state.grid[7].map( (cell, colIndex) => (
+                            <td>
                                 <CellComponent key={colIndex} value={this.state.grid[7][colIndex]}
                                                onChange={this.handleGridChange.bind(this, 7, colIndex)}/>
+                            </td>
                             )
                         )}
-                </div>
-                <div>
+                </tr>
+                <tr>
                     {
                         this.state.grid[8].map( (cell, colIndex) => (
+                            <td>
                                 <CellComponent key={colIndex} value={this.state.grid[8][colIndex]}
                                                onChange={this.handleGridChange.bind(this, 8, colIndex)}/>
+                            </td>
                             )
                         )}
-                </div>
-                <div>
-                    <button onClick={this.handleSubmit}>Solve Puzzle</button>
-                </div>
+                </tr>
+                </tbody>
+            </table>
+                    <div>
+                        <button onClick={this.handleSubmit}>Solve Puzzle</button>
+                    </div>
             </div>
         );
     }
