@@ -3,5 +3,7 @@
 
 .cell {
   width: 20px;
+  font-size: 18px;
+  border-right-width: thick;
 }
 

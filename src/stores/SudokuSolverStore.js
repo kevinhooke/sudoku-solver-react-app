@@ -39,6 +39,13 @@ class SudokuSolverStore extends EventEmitter {
 
             case 'UPDATE':
                 console.log("SudokuSolverStore is handling UPDATE action!: " + JSON.stringify(action.data));
+                var newData = [];
+
+                for(var row in action.data){
+                    console.log("row: " + JSON.stringify(action.data[row]));
+                    newData[row] = action.data[row];
+                }
+                this.setData(newData);
                 this.emit('change');
                 break;
         }
