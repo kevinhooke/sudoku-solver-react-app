@@ -1,6 +1,13 @@
 .App {
 }
 
+.sudoku-grid-container{
+}
+
+.buttons{
+  margin-right:0;
+}
+
 .cell {
   width: 20px;
   font-size: 18px;
@@ -8,6 +15,7 @@
 
 .sudoku-grid{
   border-collapse: collapse;
+  margin: 0 auto;
 }
 
 .sudoku-grid tbody tr td{
