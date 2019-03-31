@@ -2,6 +2,9 @@ import AppDispatcher from "../dispatcher/Dispatcher";
 var EventEmitter = require('events').EventEmitter;
 
 var puzzleData = {
+}
+
+var message = {
 
 }
 
@@ -18,6 +21,18 @@ class SudokuSolverStore extends EventEmitter {
 
     removeChangeListener(callback){
         this.removeListener('change', callback);
+    }
+
+    addErrorListener(callback){
+        this.on('error', callback);
+    }
+
+    removeErrorListener(callback){
+        this.removeListener('error', callback);
+    }
+
+    setMessage(newMessage){
+        message = newMessage;
     }
 
     setData(newData){
@@ -47,6 +62,11 @@ class SudokuSolverStore extends EventEmitter {
                 }
                 this.setData(newData);
                 this.emit('change');
+                break;
+
+            case 'ERROR' :
+                this.setData(action.data);
+                this.emit('error');
                 break;
         }
     }

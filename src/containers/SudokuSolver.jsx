@@ -18,6 +18,7 @@ class SudokuSolver extends Component {
         }
 
         this.onChange = this.onChange.bind(this);
+        this.onError = this.onError.bind(this);
     };
 
     //handler approach 2:
@@ -25,7 +26,12 @@ class SudokuSolver extends Component {
         console.log("row [" + row + "] col [" + colIndex + "] : " + event.target.value);
         var updatedGrid = [...this.state.grid];
         updatedGrid[row][colIndex] = event.target.value;
-        this.setState({grid: updatedGrid});
+
+        //before adding Flux, to update state directly
+        //this.setState({grid: updatedGrid});
+
+        //with Flux, call Action to send updated data to Store
+        SudokuSolverAction.updatePuzzleData(updatedGrid);
     }
 
     handleSubmit(event) {
@@ -37,8 +43,7 @@ class SudokuSolver extends Component {
     handleClear(event) {
         event.preventDefault();
         console.log("clear pressed");
-        //TODO: handle clean
-        //SudokuSolverAction.clearGridData();
+        SudokuSolverAction.clearData();
     }
 
     /**
@@ -46,7 +51,12 @@ class SudokuSolver extends Component {
      */
     componentWillMount() {
         SudokuSolverStore.addChangeListener(this.onChange);
+        SudokuSolverStore.addErrorListener(this.onError);
         SudokuSolverAction.initSamplePuzzle();
+    }
+
+    onError(){
+        console.log('SudokuSolver onError triggered');
     }
 
     /**
