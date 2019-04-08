@@ -3,6 +3,10 @@ import CellComponent from "../components/CellComponent";
 import SudokuSolverAction from "../actions/SudokuSolverAction";
 import SudokuSolverStore from "../stores/SudokuSolverStore";
 
+//TODO button click to repopulate sample puzzle
+
+//TODO spruce up error message box
+
 class SudokuSolver extends Component {
 
     constructor(props) {
@@ -11,6 +15,7 @@ class SudokuSolver extends Component {
         this.state =
             {
                 grid: [],
+                message: ""
             };
 
         for (var row = 0; row < 9; row++) {
@@ -57,6 +62,7 @@ class SudokuSolver extends Component {
 
     onError(){
         console.log('SudokuSolver onError triggered');
+        this.setState({message: SudokuSolverStore.getMessage()});
     }
 
     /**
@@ -70,6 +76,7 @@ class SudokuSolver extends Component {
     render() {
         return (
             <div className="sudoku-grid-container">
+                <div id="messages">{this.state.message}</div>
                 <table className="sudoku-grid">
                     <tbody>
                     <tr>

@@ -69,18 +69,22 @@ const SudokuSolverAction = {
 
     buildRequest(){
         var requestData = [];
-        var currentData = SudokuSolverStore.getData();
+        //console.log("check before , array in store: " + JSON.stringify( SudokuSolverStore.getData()));
+        //use slice() to clone the original array, to not modify it directly
+        var currentData = SudokuSolverStore.getData().slice();
         console.log("current data: " + JSON.stringify(currentData));
         for (var row=0;row<9;row++) {
-            //join array to a string
-            var currentRow = currentData[row];
+            //clone a copy of the current row array
+            var currentRow = [...currentData[row]];
             for(var cell=0;cell<9;cell++){
                 if(currentRow[cell] === ""){
                     currentRow[cell] = ".";
                 }
             }
+            //join array to a string
             requestData[row] = currentRow.join("");
         }
+        //console.log("check, array in store: " + JSON.stringify( SudokuSolverStore.getData()));
         return requestData;
     },
 

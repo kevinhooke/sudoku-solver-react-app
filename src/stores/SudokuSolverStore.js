@@ -31,6 +31,10 @@ class SudokuSolverStore extends EventEmitter {
         this.removeListener('error', callback);
     }
 
+    getMessage(){
+        return message;
+    }
+
     setMessage(newMessage){
         message = newMessage;
     }
@@ -65,7 +69,7 @@ class SudokuSolverStore extends EventEmitter {
                 break;
 
             case 'ERROR' :
-                this.setData(action.data);
+                this.setMessage(action.message);
                 this.emit('error');
                 break;
         }
