@@ -3,7 +3,11 @@ import CellComponent from "../components/CellComponent";
 import SudokuSolverAction from "../actions/SudokuSolverAction";
 import SudokuSolverStore from "../stores/SudokuSolverStore";
 
-//TODO button click to repopulate sample puzzle
+//TODO validation on input fields
+
+//TODO clear error message on each action
+
+//TODO show solving progress/status while waiting for response
 
 //TODO spruce up error message box
 
@@ -51,6 +55,11 @@ class SudokuSolver extends Component {
         SudokuSolverAction.clearData();
     }
 
+    handleRestSample(event){
+        event.preventDefault();
+        SudokuSolverAction.initSamplePuzzle();
+    }
+
     /**
      * Load initial state with a sample.
      */
@@ -77,6 +86,12 @@ class SudokuSolver extends Component {
         return (
             <div className="sudoku-grid-container">
                 <div id="messages">{this.state.message}</div>
+                <div className="buttons">
+                    <button className="buttons" onClick={this.handleSubmit}>Solve Puzzle</button>
+                    <button className="buttons" onClick={this.handleClear}>Clear grid</button>
+                    <button className="buttons" onClick={this.handleRestSample}>Reload sample puzzle</button>
+                </div>
+
                 <table className="sudoku-grid">
                     <tbody>
                     <tr>
@@ -172,10 +187,6 @@ class SudokuSolver extends Component {
                     </tr>
                     </tbody>
                 </table>
-                <div className="buttons">
-                    <button onClick={this.handleSubmit}>Solve Puzzle</button>
-                    <button onClick={this.handleClear}>Clear grid</button>
-                </div>
             </div>
         );
     }
